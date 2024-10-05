@@ -9,7 +9,7 @@ public class MyLinkedList {
         last = null;
         size = 0;
     }
-    public void add(int value){
+    public void add(UserType value){
         MyNode newNode = new MyNode(null, value, null);
         if(size==0){
             last = newNode;

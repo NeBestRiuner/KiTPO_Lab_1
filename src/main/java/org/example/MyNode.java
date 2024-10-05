@@ -1,10 +1,10 @@
 package org.example;
 
 public class MyNode {
-    private int value;
+    private UserType value;
     private MyNode next;
     private MyNode prev;
-    MyNode(MyNode prev, int value, MyNode next){
+    MyNode(MyNode prev, UserType value, MyNode next){
         this.value = value;
         this.next = next;
         this.prev = prev;
@@ -18,7 +18,7 @@ public class MyNode {
         return prev;
     }
 
-    public int getValue() {
+    public UserType getValue() {
         return value;
     }
 
@@ -30,7 +30,7 @@ public class MyNode {
         this.prev = prev;
     }
 
-    public void setValue(int value) {
+    public void setValue(UserType value) {
         this.value = value;
     }
 }
