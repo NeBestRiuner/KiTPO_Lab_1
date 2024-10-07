@@ -33,4 +33,8 @@ public class MyNode {
     public void setValue(UserType value) {
         this.value = value;
     }
+
+    public Object printValue() {
+        return value.getValue();
+    }
 }
