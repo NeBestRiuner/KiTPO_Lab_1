@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.InputStreamReader;
+import java.util.Comparator;
 import java.util.Random;
 
 public class MyFloat implements UserType{
@@ -17,7 +18,7 @@ public class MyFloat implements UserType{
     @Override
     public Object create() {
         Random rnd = new Random();
-        value = rnd.nextFloat();
+        value = rnd.nextFloat(100);
         return new MyFloat(value);
     }
     @Override
@@ -35,8 +36,14 @@ public class MyFloat implements UserType{
         return new MyFloat(Float.parseFloat(ss));
     }
     @Override
-    public Comparator getTypeComparator() {
-        return null;
+    public Comparator<Object> getTypeComparator() {
+        return new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+
+                return Float.compare(((MyFloat)o1).value,((MyFloat)o2).value);
+            }
+        };
     }
     @Override
     public Object getValue() {

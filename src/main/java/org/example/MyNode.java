@@ -1,6 +1,8 @@
 package org.example;
 
-public class MyNode {
+import java.io.Serializable;
+
+public class MyNode implements Serializable {
     private UserType value;
     private MyNode next;
     private MyNode prev;

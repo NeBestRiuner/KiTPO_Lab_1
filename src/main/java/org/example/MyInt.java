@@ -4,9 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.Comparator;
 
 public class MyInt implements UserType {
-    int value;
+    Integer value;
 
     public MyInt(){
     }
@@ -21,7 +22,7 @@ public class MyInt implements UserType {
     @Override
     public Object create() {
         Random rnd = new Random();
-        value = rnd.nextInt();
+        value = rnd.nextInt(100);
         return new MyInt(value);
     }
 
@@ -43,15 +44,21 @@ public class MyInt implements UserType {
     }
 
     @Override
-    public Comparator getTypeComparator() {
-        return null;
-    }
-    @Override
     public Object getValue() {
         return value;
     }
 
     public void setValue(int value) {
         this.value = value;
+    }
+    @Override
+    public Comparator<Object>getTypeComparator(){
+        return new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                //System.out.println( ((MyInt)o2).value.intValue());
+                return (((MyInt)o1).value.intValue() - ((MyInt)o2).value.intValue());
+            }
+        };
     }
 }

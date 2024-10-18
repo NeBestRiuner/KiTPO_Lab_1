@@ -1,6 +1,9 @@
 import org.example.*;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
+
 
 public class MyTest {
     @Test
@@ -117,5 +120,103 @@ public class MyTest {
         Point point = new Point();
         Point send = (Point)point.parseValue(ss);
         System.out.println(send.getValue());
+    }
+    @Test
+    public void testForEach(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 5; i++) {
+            myLinkedList.add((Point)new Point().create());
+        }
+        myLinkedList.forEach(new ForEach() {
+            @Override
+            public void toDo(Object obj) {
+                System.out.println(((UserType)obj).getValue());
+            }
+        });
+        System.out.println(" ");
+    }
+    @Test
+    public void testSet(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 5; i++) {
+            // Press Shift+F9 to start debugging your code. We have set one breakpoint
+            // for you, but you can always add more by pressing Ctrl+F8.
+
+            myLinkedList.add((MyInt)new MyInt(i));
+        }
+        myLinkedList.set((MyInt)new MyInt(33), 3);
+        myLinkedList.print();
+    }
+    @Test
+    public void testQuickSortInt(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 10; i++) {
+            myLinkedList.add((MyInt)new MyInt().create());
+        }
+        myLinkedList.print();
+        System.out.println("До сортировки");
+        myLinkedList.quickSort(myLinkedList,0,myLinkedList.size()-1,(new MyInt()).getTypeComparator());
+        myLinkedList.print();
+        System.out.println("После сортировки");
+    }
+    @Test
+    public void testQuickSortFloat(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 10; i++) {
+            myLinkedList.add((MyFloat)new MyFloat().create());
+        }
+        myLinkedList.print();
+        System.out.println("До сортировки");
+        myLinkedList.quickSort(myLinkedList,0,myLinkedList.size()-1,(new MyFloat()).getTypeComparator());
+        myLinkedList.print();
+        System.out.println("После сортировки");
+    }
+    @Test
+    public void testQuickSortString(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 10; i++) {
+            myLinkedList.add((MyString)new MyString().create());
+        }
+        myLinkedList.print();
+        System.out.println("До сортировки");
+        myLinkedList.quickSort(myLinkedList,0,myLinkedList.size()-1,(new MyString()).getTypeComparator());
+        myLinkedList.print();
+        System.out.println("После сортировки");
+    }
+    @Test
+    public void testQuickSortPoint(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 10; i++) {
+            myLinkedList.add((Point)new Point().create());
+        }
+        myLinkedList.print();
+        System.out.println("До сортировки");
+        myLinkedList.quickSort(myLinkedList,0,myLinkedList.size()-1,(new Point()).getTypeComparator());
+        myLinkedList.print();
+        System.out.println("После сортировки");
+    }
+    @Test
+    public void testSerializeToFile(){
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 1; i <= 10; i++) {
+            myLinkedList.add((MyInt)new MyInt().create());
+        }
+        myLinkedList.print();
+        System.out.println("До сохранения");
+        try {
+            MyLinkedList.serializeToBinary(myLinkedList);
+        }catch (IOException ioe){
+
+        }
+    }
+    @Test
+    public void testDeserializeFromFile(){
+        try {
+            MyLinkedList myLinkedList = MyLinkedList.deserializeFromBinary();
+            myLinkedList.print();
+            System.out.println("Загрузка из сохранения");
+        }catch (Exception exception){
+
+        }
     }
 }
